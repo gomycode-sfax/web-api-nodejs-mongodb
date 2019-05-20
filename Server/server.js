@@ -1,12 +1,12 @@
 
-////////////////////////////////////////////////////// 1 //////////////////////////////////////////////////////////
-
 // 1 Install NodeJS (npm) => https://nodejs.org/en/
 // 2 Install MongoDB and MongoDB Compass => https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/
 
 // Install express
 // Express is a library that simplifies the usage of nodeJS http module (there are other modules such as fileSystem module ...)
-// => npm install express body-parser (enables us to manipulate the request body (corps))
+// => npm install express
+// => npm install body-parser
+
 
 // Import express
 const express = require('express');
@@ -17,10 +17,8 @@ const bodyParser = require('body-parser');
 const app = express();
 app.use(bodyParser.json());
 
-////////////////////////////////////////////////////// 1 //////////////////////////////////////////////////////////
 
 
-// ************************************************** 2 *********************************************************//
 
 // Install the mongoDB driver for nodeJS => https://docs.mongodb.com/ecosystem/drivers/
 // => npm install mongodb =>  https://www.npmjs.com/package/mongodb 
@@ -32,20 +30,17 @@ const mongodb = require('mongodb');
 const MongoDB_URL = 'mongodb://localhost:27017';
 
 // Database Name
-const dbName = "st-db";
-// const dbName = "contacts-db";
-
-// ************************************************** 2 *********************************************************//
+const dbName = "contacts-db";
 
 
-////////////////////////////////////////////////////// 3 //////////////////////////////////////////////////////////
+// Install cors
+// => npm install cors
+
 // Import cors
 const cors = require('cors');
 app.use(cors());
-////////////////////////////////////////////////////// 3 //////////////////////////////////////////////////////////
 
 
-// ************************************************** 2 *********************************************************//
 //Establishing connection between the server and the db
 mongodb.MongoClient.connect(MongoDB_URL, (err, client) => {
     if (err) {
@@ -59,31 +54,7 @@ mongodb.MongoClient.connect(MongoDB_URL, (err, client) => {
 
     // Add a contact
     
-    // Introduce POSTMAN (used to simulate the frontend requests and to test our backend api ...)
-    // Say that we want to add a user to the DB
-    // Do (SIMULATE) a POST Request with Postman (SIMULATION ...)
-
-    /*
-    app.post('url', function);
-    app.post('http://localhost:4000/contacts', function)    
-    app.post('/contacts', function)    
-    app.post('/contacts', function(req, res) {
-        // function Body ... 
-        // ...
-        res.send('naubfaibaibaibaiub')
-    })
-
-
-    function add(a, b) {
-        return (a+b);
-    } 
-
-
-    let add = (a, b) => {
-        return (a+b);
-    }
-    */
-
+    // Install POSTMAN (used to simulate the frontend requests and to test our backend api ...)
     app.post('/contacts', (req, res) => {
         const body = req.body;
         db.collection('contacts').insertOne(body, (err, data) => { // initialize the contacts collection
@@ -114,7 +85,7 @@ mongodb.MongoClient.connect(MongoDB_URL, (err, client) => {
         })
     })
 
-    // Modify ons contact
+    // Modify one contact
     app.put('/contacts/:id', (req, res) => {
         const body = req.body;
         const id = req.params.id;
@@ -138,12 +109,7 @@ mongodb.MongoClient.connect(MongoDB_URL, (err, client) => {
 
 
 })
-// ************************************************** 2 *********************************************************//
 
-
-
-
-////////////////////////////////////////////////////// 1 //////////////////////////////////////////////////////////
 
 // send message for default URL
 app.get('/', (req, res) => {
@@ -152,6 +118,5 @@ app.get('/', (req, res) => {
 });
 
 // Launch app to listen to specified port
-app.listen(4000, () => console.log('Server is listening on port 4000'));
+app.listen(5000, () => console.log('Server is listening on port 5000'));
 
-////////////////////////////////////////////////////// 1 //////////////////////////////////////////////////////////
