@@ -114,7 +114,7 @@ mongodb.MongoClient.connect(MongoDB_URL, (err, client) => {
 // send message for default URL
 app.get('/', (req, res) => {
     console.log(req.body);
-    res.send('Welcome to the workshop')
+    res.send('Welcome to the API')
 });
 
 // Launch app to listen to specified port
