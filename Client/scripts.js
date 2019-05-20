@@ -1,7 +1,6 @@
-// import axios from 'axios';
 
 // get all
-fetch('http://localhost:4000/contacts')
+fetch('http://localhost:5000/contacts')
     .then(res => res.json())
     .then(result => {
         console.log(result);
@@ -11,18 +10,14 @@ fetch('http://localhost:4000/contacts')
     })
     .catch(err => console.log(err))
 
+// add a contact to the database
 document.getElementById("form").addEventListener('submit', addContact);
-
 function addContact() {
     const name = document.getElementById("name").value;
     const phone = document.getElementById("phone").value;
-    axios.post('http://localhost:4000/contacts', { name: name, phone: phone })
+    const email = document.getElementById("email").value;
+
+    axios.post('http://localhost:5000/contacts', { name: name, phone: phone, email: email })
         .then(res => console.log(res))
         .catch(err => console.log(err))
 }
-
-
-// //add a contact
-// axios.post('http://localhost:4000/contacts', {name: "abc 6", phone: "007 6"})
-//  .then(res => console.log(res))
-//  .catch(err => console.log(err))
